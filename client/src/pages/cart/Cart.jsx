@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../../components/layout/Layout";
 import { MyContextState } from "../../context/data/myContext";
+import BuyNowModal from "../../components/Modal/BuyNowModal";
 
 const Cart = () => {
   const { mode } = MyContextState();
@@ -8,7 +9,7 @@ const Cart = () => {
   return (
     <Layout>
       <div
-        className="h-screen bg-gray-100 pt-5 "
+        className="h-screen bg-gray-100 pt-28  "
         style={{
           backgroundColor: mode === "dark" ? "#282c34" : "",
           color: mode === "dark" ? "white" : "",
@@ -122,13 +123,7 @@ const Cart = () => {
                 </p>
               </div>
             </div>
-            {/* <Modal  /> */}
-            <button
-              type="button"
-              className="w-full  bg-violet-600 py-2 text-center rounded-lg text-white font-bold "
-            >
-              Buy Now
-            </button>
+            <BuyNowModal />
           </div>
         </div>
       </div>
