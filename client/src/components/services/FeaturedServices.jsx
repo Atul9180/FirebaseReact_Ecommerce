@@ -5,7 +5,7 @@ const FeaturedServices = () => {
   const { mode } = MyContextState();
   return (
     <div>
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 body-font ">
         <div className="container px-5 md:py-5  mx-auto">
           <div className="flex flex-wrap -m-4 text-center">
             <div className="p-4 md:w-1/3 sm:w-1/2 w-full">

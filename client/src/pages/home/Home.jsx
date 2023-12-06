@@ -4,6 +4,7 @@ import HeroSection from "../../components/heroSection/HeroSection";
 import Filter from "../../components/filter/Filter";
 import ProductCard from "../../components/productCard/ProductCard";
 import FeaturedServices from "../../components/services/FeaturedServices";
+import Testimonial from "../../components/testimonial/Testimonial";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Filter />
       <ProductCard />
       <FeaturedServices />
+      <Testimonial />
     </Layout>
   );
 };
