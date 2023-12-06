@@ -6,7 +6,7 @@ const Footer = () => {
   const { mode } = MyContextState;
   return (
     <footer
-      className="text-gray-600  mt-7 body-font bg-gray-300"
+      className="text-gray-600  body-font bg-gray-300"
       style={{
         backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
         color: mode === "dark" ? "white" : "",
