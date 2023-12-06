@@ -38,7 +38,8 @@ const FeaturedServices = () => {
                   Premium Tshirts
                 </h2>
                 <p className="leading-relaxed">
-                  Our T-Shirts are 100% made of cotton.
+                  Our Products are of 100% Premium quality. Best Price
+                  Guarantee.
                 </p>
               </div>
             </div>
@@ -72,7 +73,8 @@ const FeaturedServices = () => {
                   Free Shipping
                 </h2>
                 <p className="leading-relaxed">
-                  We ship all over India for FREE.
+                  We ship all over India. No Shipping charges for first 3
+                  orders.
                 </p>
               </div>
             </div>
@@ -106,7 +108,7 @@ const FeaturedServices = () => {
                   Exciting Offers
                 </h2>
                 <p className="leading-relaxed">
-                  We provide amazing offers & discounts
+                  Amazing offers & discounts. Best Credit/Debit card offers.
                 </p>
               </div>
             </div>

@@ -27,7 +27,7 @@ const Testimonial = () => {
                 <img
                   alt="testimonial"
                   className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                  src="https://ecommerce-sk.vercel.app/img/kamal.png"
+                  src="https://th.bing.com/th/id/OIP.WDtkv_buw_7q13Ice2DauwHaHa?pid=ImgDet&w=192&h=192&c=7&dpr=1.3"
                 />
                 <p
                   style={{ color: mode === "dark" ? "white" : "" }}
@@ -43,7 +43,7 @@ const Testimonial = () => {
                   style={{ color: mode === "dark" ? "#ff4162" : "" }}
                   className="text-gray-900 font-medium title-font tracking-wider text-sm uppercase"
                 >
-                  Avneesh Sehgal
+                  Sneha Sehgal
                 </h2>
                 <p
                   style={{ color: mode === "dark" ? "white" : "" }}
@@ -58,7 +58,7 @@ const Testimonial = () => {
                 <img
                   alt="testimonial"
                   className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                  src="https://cdn-icons-png.flaticon.com/128/2763/2763444.png"
+                  src="https://th.bing.com/th/id/OIP._mEDbYqfUWWmyOi-hCvvFQHaHa?pid=ImgDet&w=199&h=199&c=7&dpr=1.3"
                 />
                 <p
                   style={{ color: mode === "dark" ? "white" : "" }}
@@ -74,13 +74,13 @@ const Testimonial = () => {
                   style={{ color: mode === "dark" ? "#ff4162" : "" }}
                   className="text-gray-900 font-medium title-font tracking-wider text-sm uppercase"
                 >
-                  Rajesh SIngh
+                  Nancy Symond
                 </h2>
                 <p
                   style={{ color: mode === "dark" ? "white" : "" }}
                   className="text-gray-500"
                 >
-                  UI Develeoper
+                  IOS Develeoper
                 </p>
               </div>
             </div>
@@ -89,7 +89,7 @@ const Testimonial = () => {
                 <img
                   alt="testimonial"
                   className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                  src="https://webknudocs.vercel.app/logo/react.png"
+                  src="https://about.dish.com/image/Atilla+Tinic+Circular+Thumbnail.png"
                 />
                 <p
                   style={{ color: mode === "dark" ? "white" : "" }}
