@@ -1,9 +1,10 @@
 import React from "react";
 import { FaUserTie } from "react-icons/fa";
 import Layout from "../../../components/layout/Layout";
+import DashboardTab from "./DashboardTab";
 import { MyContextState } from "../../../context/data/myContext";
 
-function Dashboard() {
+const Dashboard = () => {
   const { mode } = MyContextState();
   return (
     <Layout>
@@ -124,9 +125,10 @@ function Dashboard() {
             </div>
           </div>
         </div>
+        <DashboardTab />
       </section>
     </Layout>
   );
-}
+};
 
 export default Dashboard;
