@@ -1,4 +1,6 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Order from "./pages/order/Order";
@@ -26,6 +28,7 @@ const App = () => {
         <Route path="/updateproduct" element={<UpdateProduct />} />
         <Route path="/*" element={<NoPage />} />
       </Routes>
+      <ToastContainer />
     </Router>
   );
 };
