@@ -5,6 +5,8 @@ import BuyNowModal from "../../components/Modal/BuyNowModal";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { deleteFromCart } from "../../redux/cartSlice";
+import { collection, addDoc } from "firebase/firestore";
+import { fireDB } from "../../firebase/FirebaseConfig";
 
 const Cart = () => {
   const { mode } = MyContextState();
@@ -31,6 +33,70 @@ const Cart = () => {
   const deleteCart = (item) => {
     dispatch(deleteFromCart(item));
     toast.success("deleted item form cart");
+  };
+
+  //RazorPay Integration:
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const buyNowBtn = async () => {
+    //validation:
+    if (name === "" || address === "" || pincode === "" || phoneNumber === "") {
+      return toast.error("All fields are required");
+    }
+    const addressInfo = {
+      name,
+      address,
+      pincode,
+      phoneNumber,
+      date: new Date().toLocaleString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      }),
+    };
+    console.log(addressInfo);
+
+    let options = {
+      key: process.env.REACT_APP_RAZORPAY_KEY,
+      key_secret: process.env.REACT_APP_RAZORPAY_SECRET_KEY,
+      amount: parseInt(grandTotal * 100),
+      currency: "INR",
+      order_receipt: "order_rcptid_" + name,
+      name: "Mart",
+      description: "for testing purpose",
+      handler: function (response) {
+        console.log(response);
+        toast.success("Payment Successfull");
+        //send order to server
+        const paymentId = response.razorpay_payment_id;
+        //store in forestore:
+        const orderInfo = {
+          cartItems,
+          addressInfo,
+          date: new Date().toLocaleString("en-US", {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+          }),
+          email: JSON.parse(localStorage.getItem("user")).user.email,
+          userid: JSON.parse(localStorage.getItem("user")).user.uid,
+          paymentId,
+        };
+
+        try {
+          const result = addDoc(collection(fireDB, "orders"), orderInfo);
+        } catch (error) {
+          toast.error(error?.message);
+        }
+      },
+    };
+
+    let pay = new window.Razorpay(options);
+    pay.open();
+    console.log(pay);
   };
 
   return (
@@ -154,7 +220,17 @@ const Cart = () => {
                 </p>
               </div>
             </div>
-            <BuyNowModal />
+            <BuyNowModal
+              name={name}
+              address={address}
+              pincode={pincode}
+              phoneNumber={phoneNumber}
+              setName={setName}
+              setAddress={setAddress}
+              setPincode={setPincode}
+              setPhoneNumber={setPhoneNumber}
+              buyNow={buyNowBtn}
+            />
           </div>
         </div>
       </div>
