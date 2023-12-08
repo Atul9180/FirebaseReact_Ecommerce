@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [];
+const initialState = JSON.parse(localStorage.getItem("cart")) ?? [];
 
 //first slice of name: cart....will let store know about all slices:
 //reducers will have functions(state,action) of dispatch to use later ....

@@ -1,24 +1,32 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { FaUser, FaCartPlus } from "react-icons/fa";
 import { AiFillShopping, AiFillPlusCircle, AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { MyContextState } from "../../../context/data/myContext";
+import { useNavigate } from "react-router-dom";
 
 const DashboardTab = () => {
-  const { mode, product } = MyContextState();
-  let [isOpen, setIsOpen] = useState(false);
+  const { mode, product, edithandle, updateProduct, deleteProduct } =
+    MyContextState();
+  // let [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  // function closeModal() {
+  //   setIsOpen(false);
+  // }
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  // function openModal() {
+  //   setIsOpen(true);
+  // }
+
+  const productAddBtnHandler = () => {
+    navigate("/addproduct");
+  };
+
   return (
-    <div>
+    <>
       <div className="container mx-auto">
         <div className="tab container mx-auto ">
           <Tabs defaultIndex={0} className=" ">
@@ -68,6 +76,7 @@ const DashboardTab = () => {
                   <Link to={"/addproduct"}>
                     <button
                       type="button"
+                      onClick={productAddBtnHandler}
                       className="focus:outline-none text-white bg-pink-600 shadow-[inset_0_0_10px_rgba(0,0,0,0.6)] border hover:bg-pink-700 outline-0 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
                       style={{
                         backgroundColor: mode === "dark" ? "rgb(46 49 55)" : "",
@@ -170,7 +179,7 @@ const DashboardTab = () => {
                                     color: mode === "dark" ? "white" : "",
                                   }}
                                 >
-                                  <div>
+                                  <div onClick={() => deleteProduct(item)}>
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
                                       fill="none"
@@ -187,7 +196,7 @@ const DashboardTab = () => {
                                     </svg>
                                   </div>
                                   <Link to={"/updateproduct"}>
-                                    <div>
+                                    <div onClick={() => edithandle(item)}>
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
@@ -452,7 +461,7 @@ const DashboardTab = () => {
           </Tabs>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

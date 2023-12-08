@@ -6,6 +6,7 @@ import { MyContextState } from "../../../context/data/myContext";
 
 const Dashboard = () => {
   const { mode } = MyContextState();
+
   return (
     <Layout>
       <section className="text-gray-600 body-font mt-10 mb-10">
