@@ -1,8 +1,15 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import Home from "./pages/home/Home";
+import About from "./pages/about/About";
+import Contact from "./pages/contact/Contact";
 import Order from "./pages/order/Order";
 import Cart from "./pages/cart/Cart";
 import NoPage from "./pages/nopage/NoPage";
@@ -18,14 +25,44 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/order" element={<Order />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route
+          path="/order"
+          element={
+            <ProtectedRoute>
+              <Order />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRouteForAdmin>
+              <Dashboard />
+            </ProtectedRouteForAdmin>
+          }
+        />
         <Route path="/login" element={<UserSignIn />} />
         <Route path="/signup" element={<UserSignUp />} />
         <Route path="/productinfo/:id" element={<ProductDetails />} />
-        <Route path="/addproduct" element={<AddProduct />} />
-        <Route path="/updateproduct" element={<UpdateProduct />} />
+        <Route
+          path="/addproduct"
+          element={
+            <ProtectedRouteForAdmin>
+              <AddProduct />
+            </ProtectedRouteForAdmin>
+          }
+        />
+        <Route
+          path="/updateproduct"
+          element={
+            <ProtectedRouteForAdmin>
+              <UpdateProduct />
+            </ProtectedRouteForAdmin>
+          }
+        />
         <Route path="/*" element={<NoPage />} />
       </Routes>
       <ToastContainer />
@@ -34,3 +71,23 @@ const App = () => {
 };
 
 export default App;
+
+//user Protected Route
+export const ProtectedRoute = ({ children }) => {
+  const user = localStorage.getItem("user");
+  if (user) {
+    return children;
+  } else {
+    return <Navigate to={"/login"} />;
+  }
+};
+
+//admin Protected Route
+export const ProtectedRouteForAdmin = ({ children }) => {
+  const admin = JSON.parse(localStorage.getItem("user"));
+  if (admin?.user.email === "atul@gmail.com") {
+    return children;
+  } else {
+    return <Navigate to={"/login"} />;
+  }
+};

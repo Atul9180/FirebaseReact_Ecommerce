@@ -1,14 +1,26 @@
 import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsFillCloudSunFill } from "react-icons/bs";
 import { FiSun } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
 import { MyContextState } from "../../context/data/myContext";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { toggleMode, mode } = MyContextState();
+  const navigate = useNavigate();
+  const cartItems = useSelector((state) => state.cart);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user?.user?.email);
+
+  //logout:
+  const logout = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
 
   return (
     <div className="bg-white sticky top-0 z-50  ">
@@ -54,41 +66,73 @@ const Navbar = () => {
                     <RxCross2 />
                   </button>
                 </div>
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
+                <div className="flex flex-col space-y-6 border-t border-gray-200 px-4 py-6">
                   <Link
                     to={"/allproducts"}
                     className="text-sm font-medium text-gray-900 "
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
-                    All Products
+                    Products
                   </Link>
-                  <div className="flow-root">
-                    <Link
-                      to={"/order"}
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Order
-                    </Link>
-                  </div>
+                  <Link
+                    to={"/about"}
+                    className="text-sm font-medium text-gray-900 "
+                    style={{ color: mode === "dark" ? "white" : "" }}
+                  >
+                    About
+                  </Link>
+                  <Link
+                    to={"/contact"}
+                    className="text-sm font-medium text-gray-900 "
+                    style={{ color: mode === "dark" ? "white" : "" }}
+                  >
+                    contact
+                  </Link>
+                  {user ? (
+                    <div className="flow-root">
+                      <Link
+                        to={"/order"}
+                        style={{ color: mode === "dark" ? "white" : "" }}
+                        className="-m-2 block p-2 font-medium text-gray-900"
+                      >
+                        Order
+                      </Link>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  {user?.user?.email === "atul@gmail.com" ? (
+                    <div className="flow-root">
+                      <Link
+                        to={"/dashboard"}
+                        className="-m-2 block p-2 font-medium text-gray-900"
+                        style={{ color: mode === "dark" ? "white" : "" }}
+                      >
+                        admin
+                      </Link>
+                    </div>
+                  ) : (
+                    ""
+                  )}
 
                   <div className="flow-root">
-                    <Link
-                      to={"/dashboard"}
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      admin
-                    </Link>
-                  </div>
-
-                  <div className="flow-root">
-                    <a
-                      className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      Logout
-                    </a>
+                    {user ? (
+                      <a
+                        onClick={logout}
+                        className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
+                        style={{ color: mode === "dark" ? "white" : "" }}
+                      >
+                        Logout
+                      </a>
+                    ) : (
+                      <a
+                        onClick={() => navigate("/login")}
+                        className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
+                        style={{ color: mode === "dark" ? "white" : "" }}
+                      >
+                        Login
+                      </a>
+                    )}
                   </div>
                 </div>
               </Dialog.Panel>
@@ -167,29 +211,62 @@ const Navbar = () => {
                     className="text-sm font-medium text-gray-700 "
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
-                    All Products
+                    Products
                   </Link>
                   <Link
-                    to={"/order"}
+                    to={"/about"}
                     className="text-sm font-medium text-gray-700 "
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
-                    Order
+                    About
                   </Link>
                   <Link
-                    to={"/dashboard"}
+                    to={"/contact"}
                     className="text-sm font-medium text-gray-700 "
                     style={{ color: mode === "dark" ? "white" : "" }}
                   >
-                    Admin
+                    Contact
                   </Link>
+                  {user ? (
+                    <Link
+                      to={"/order"}
+                      className="text-sm font-medium text-gray-700 "
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Order
+                    </Link>
+                  ) : (
+                    ""
+                  )}
+                  {user?.user?.email === "atul@gmail.com" ? (
+                    <Link
+                      to={"/dashboard"}
+                      className="text-sm font-medium text-gray-700 "
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Admin
+                    </Link>
+                  ) : (
+                    ""
+                  )}
 
-                  <a
-                    className="text-sm font-medium text-gray-700 cursor-pointer  "
-                    style={{ color: mode === "dark" ? "white" : "" }}
-                  >
-                    Logout
-                  </a>
+                  {user ? (
+                    <a
+                      onClick={logout}
+                      className="text-sm font-medium text-gray-700 cursor-pointer  "
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Logout
+                    </a>
+                  ) : (
+                    <a
+                      onClick={() => navigate("/login")}
+                      className="text-sm font-medium text-gray-700 cursor-pointer  "
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Login
+                    </a>
+                  )}
                 </div>
 
                 {/*color  Mode change */}
@@ -232,7 +309,7 @@ const Navbar = () => {
                       className="ml-2 text-sm font-medium text-gray-700 group-"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
-                      0
+                      {cartItems.length || 0}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </Link>
